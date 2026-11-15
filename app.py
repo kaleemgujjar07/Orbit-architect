@@ -96,15 +96,38 @@ class Handler(BaseHTTPRequestHandler):
             return {}
         return json.loads(self.rfile.read(length).decode())
 
+    def _find_file(self, *candidates):
+        """Return the first candidate path that exists.
+
+        Supports both layouts:
+          * normal: templates/index.html, static/game.js
+          * flat GitHub upload: index.html, game.js, style.css at repo root
+          * nested: orbit-architect-python/templates/index.html, ...
+        """
+        for rel in candidates:
+            full = os.path.join(BASE, rel)
+            if os.path.isfile(full):
+                return full
+        raise FileNotFoundError(candidates[0])
+
     def do_GET(self):
         p = urlparse(self.path).path
         try:
             if p in ("/", "/index.html"):
-                self._send_file(os.path.join(BASE, "templates", "index.html"), "text/html")
+                full = self._find_file(
+                    os.path.join("templates", "index.html"),
+                    "index.html",
+                    os.path.join("orbit-architect-python", "templates", "index.html"),
+                )
+                self._send_file(full, "text/html")
             elif p.startswith("/static/"):
                 name = p[len("/static/"):]
                 safe = os.path.basename(name)
-                full = os.path.join(BASE, "static", safe)
+                full = self._find_file(
+                    os.path.join("static", safe),
+                    safe,
+                    os.path.join("orbit-architect-python", "static", safe),
+                )
                 ctype = "text/css" if safe.endswith(".css") else \
                     "application/javascript" if safe.endswith(".js") else "text/plain"
                 self._send_file(full, ctype)
