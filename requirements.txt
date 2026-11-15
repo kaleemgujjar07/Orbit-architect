@@ -1,0 +1,5 @@
+# Orbit Architect — no third-party dependencies.
+# The app uses only the Python 3.11+ standard library (http.server),
+# so it runs anywhere with just `python3 app.py`.
+# Flask is NOT required. If you prefer Flask, install it and adapt app.py,
+# but the stdlib version is the supported one.

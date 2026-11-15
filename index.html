@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbit Architect — Space Mission Design Game | PyInTheSky</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div><h1>🛰️ ORBIT ARCHITECT</h1><p>Space Mission Design Game — NASA Space Apps Challenge 2026 · Team PyInTheSky</p></div>
+  <div class="badge">Python simulation engine · Tsiolkovsky · Hohmann · Friis · Monte Carlo (n=200)</div>
+</header>
+
+<section id="hud" class="hud">
+  <div class="hud-card"><span>Budget</span><b id="hud-cost">$–</b><small id="hud-cost-sub"></small></div>
+  <div class="hud-card"><span>Mass (with margin)</span><b id="hud-mass">–</b><small id="hud-mass-sub"></small></div>
+  <div class="hud-card"><span>Power margin</span><b id="hud-power">–</b><small id="hud-power-sub"></small></div>
+  <div class="hud-card"><span>Data returned</span><b id="hud-data">–</b><small id="hud-data-sub"></small></div>
+  <div class="hud-card"><span>Science</span><b id="hud-science">–</b><small id="hud-science-sub"></small></div>
+  <div class="hud-card score"><span>Projected score</span><b id="hud-score">–</b><small id="hud-grade"></small></div>
+</section>
+
+<main>
+  <section class="panel">
+    <h2>1 · Mission &amp; crew</h2>
+    <label>Mission <select id="mission"></select></label>
+    <label>Difficulty <select id="difficulty">
+      <option value="easy">Easy — Cadet</option>
+      <option value="normal" selected>Normal — Engineer</option>
+      <option value="hard">Hard — Director</option>
+    </select></label>
+    <label>Team size <select id="team-size"><option>1</option><option>2</option><option>3</option><option selected>4</option></select></label>
+    <div id="roles" class="roles"></div>
+    <p id="mission-desc" class="muted"></p>
+
+    <h2>2 · Spacecraft bus</h2>
+    <div id="buses" class="cards"></div>
+
+    <h2>3 · Instruments <small>(pick up to 5)</small></h2>
+    <div id="instruments" class="cards"></div>
+
+    <h2>4 · Launch vehicle &amp; orbit</h2>
+    <label>Launch vehicle <select id="lv"></select></label>
+    <label>Orbit <select id="orbit"></select></label>
+    <div class="orbit-wrap"><canvas id="orbit-canvas" width="520" height="260"></canvas>
+    <p class="muted" id="orbit-info"></p></div>
+
+    <div class="actions">
+      <button id="btn-eval">Evaluate design</button>
+      <button id="btn-launch" class="launch">🚀 Launch &amp; simulate</button>
+      <button id="btn-mc">Run Monte Carlo (200 runs)</button>
+    </div>
+    <p class="muted">Every number is computed in Python (engine.py) — orbital period, Hohmann Δv, Tsiolkovsky, solar power 1/d², Friis link budget. Nothing is hard-coded in the browser.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Budget bars</h2>
+    <div id="bars"></div>
+    <h2>Checks</h2>
+    <ul id="checks"></ul>
+    <h2>Simulation — event log</h2>
+    <ol id="log" class="log"><li class="muted">Launch to see the month-by-month log.</li></ol>
+    <h2>Post-mission report</h2>
+    <div id="report" class="report"><p class="muted">No mission flown yet.</p></div>
+    <h2>Monte Carlo</h2>
+    <div id="mc" class="report"><p class="muted">Run Monte Carlo to get success probability, mean score, P10 / P90.</p></div>
+  </section>
+</main>
+<footer>Orbit Architect · PyInTheSky (Muhammad Kaleem &amp; Bano Rani) · NASA Space Apps Challenge 2026 · Educational values — not a vendor quote.</footer>
+<script src="/static/game.js"></script>
+</body>
+</html>
