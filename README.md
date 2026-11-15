@@ -1,12 +1,7 @@
-# Orbit Architect — Space Mission Design Game (Advanced Python)
+# Orbit Architect - Space Mission Design Game
 
-**Team PyInTheSky** — Muhammad Kaleem (@kaleem217, Team Owner) & Bano Rani (@itsbanoo)
 **NASA Space Apps Challenge 2026 · Challenge: Space Mission Design Game · Universal Event**
 
-This is the **advanced Python version**. The simulation runs in Python — not in the browser.
-The browser is only a mission-control UI; every number comes from `engine.py` via the API.
-
-## What is advanced here?
 
 - **Real orbital mechanics** (`engine.py`): period `T=2π√(a³/μ)`, circular velocity,
   Hohmann transfer Δv, escape velocity, inclination-change cost.
